@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class PlayerScript : MonoBehaviour
 {
     public float speed;
@@ -11,9 +10,8 @@ public class PlayerScript : MonoBehaviour
     float xMove;
     private float moveSpeed = 6;
     // public float bulletSpeed = 200;
-    //public float autofireDelay = 0.001f;
     private bool fire = true;
-    //public GameObject PlayerCannon;
+    public GameObject PlayerBullet;
     private Vector2 playerMovement;
     private bool BulletScript;
 
@@ -21,7 +19,6 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        UnityEngine.Debug.Log("Player position: " + transform.position);
 
     }
 
@@ -33,7 +30,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            BulletScript = fire;
+           Instantiate(PlayerBullet, transform.position, Quaternion.identity);
         }
     }
 
@@ -41,7 +38,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb.AddForce(playerMovement, ForceMode2D.Force);
         rb.velocity = playerMovement;
-        xMove = (moveSpeed * Time.deltaTime);
+        xMove = moveSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider collision)
@@ -52,10 +49,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private string GetDebuggerDisplay()
-    {
-        return ToString();
-    }
 }
 
 

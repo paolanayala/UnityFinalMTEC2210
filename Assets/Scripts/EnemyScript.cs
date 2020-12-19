@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
     private Transform UFO;
     Rigidbody2D rb;
     SpriteRenderer sr;
+    public float enemySpeed;
 
 
     // Start is called before the first frame update
@@ -15,17 +16,18 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-      float adjustedSpeed = enemyspeed + speedModifier;
+       /* float speedModifier = 0;
+        float adjustedSpeed = enemySpeed + speedModifier;
 
         transform.position += (Vector3.right * adjustedSpeed * Time.deltaTime);
-
+       */
 
     }
 
