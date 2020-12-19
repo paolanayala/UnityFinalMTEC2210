@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
     public float speed;
     private Rigidbody2D rb;
     float xMove;
-    private float moveSpeed = 6;
+    private float moveSpeed = 50;
     // public float bulletSpeed = 200;
     private bool fire = true;
     public GameObject PlayerBullet;
@@ -31,21 +31,25 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
            Instantiate(PlayerBullet, transform.position, Quaternion.identity);
+
+            PlaySound.Instance.PlayOneShot
+                (PlaySound.Instance.shoot);
         }
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(playerMovement, ForceMode2D.Force);
+        xMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        /*rb.AddForce(playerMovement, ForceMode2D.Force);
         rb.velocity = playerMovement;
-        xMove = moveSpeed * Time.deltaTime;
+        xMove = moveSpeed * Time.deltaTime;*/
     }
 
     private void OnTriggerEnter2D(Collider collision)
     {
-        if (collision.CompareTag("Walls"))
+        if (collision.CompareTag("Ground"))
         {
-           // moveSpeed = xMove;
+            rb = GetComponent<Rigidbody2D>();
         }
     }
 

@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     public float enemySpeed;
-
+    private bool enemyMovement = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +23,27 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       /* float speedModifier = 0;
+        float speedModifier = 1;
         float adjustedSpeed = enemySpeed + speedModifier;
 
-        transform.position += (Vector3.right * adjustedSpeed * Time.deltaTime);
-       */
+        transform.position += (Vector3.left * adjustedSpeed * Time.deltaTime);
+
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Walls")
+        {
+            transform.Translate(-Vector2.right * enemySpeed * Time.deltaTime);
+        }
 
-
+        if (transform.position.x <= 2.0f)
+        {
+            transform.Translate(Vector2.right * enemySpeed * Time.deltaTime);
+        }
+    }
 }
+
+
+
