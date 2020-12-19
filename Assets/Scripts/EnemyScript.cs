@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public float enemyspeed;
-    private float speedModifier = 0;
+    private Transform UFO;
+    Rigidbody2D rb;
+    SpriteRenderer sr;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        speedModifier = Random.value * 4;
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
-        Debug.Log("Speed Modifier: " + speedModifier);
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        float adjustedSpeed = enemyspeed + speedModifier;
+      float adjustedSpeed = enemyspeed + speedModifier;
+
         transform.position += (Vector3.right * adjustedSpeed * Time.deltaTime);
 
 
